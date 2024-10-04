@@ -1,0 +1,46 @@
+---
+- name: Configure Terraform Resources on Azure
+  hosts: azure_vms
+  become: yes
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install necessary packages
+      apt:
+        name:
+          - python3-pip
+          - git
+          - unzip
+        state: present
+
+    - name: Install Azure CLI
+      shell: |
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      args:
+        executable: /bin/bash
+
+    - name: Install Terraform
+      shell: |
+        wget https://releases.hashicorp.com/terraform/1.0.0/terraform_1.0.0_linux_amd64.zip
+        unzip terraform_1.0.0_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+      args:
+        executable: /bin/bash
+
+    - name: Clone Terraform configuration repository
+      git:
+        repo: 'https://github.com/your-repo/terraform-config.git'
+        dest: /home/{{ ansible_user }}/BESS
+
+    - name: Initialize Terraform
+      shell: terraform init
+      args:
+        chdir: /home/{{ ansible_user }}/BESS
+
+    - name: Apply Terraform configuration
+      shell: terraform apply -auto-approve
+      args:
+        chdir: /home/{{ ansible_user }}/BESS
