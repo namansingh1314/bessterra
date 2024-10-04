@@ -6,8 +6,6 @@
 
 ###  README.md
 
-Here's how you can include the above structure in your `README.md` file:
-
 ```markdown
 # BESS Project Structure
 
