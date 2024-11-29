@@ -23,6 +23,10 @@ BESS
 │   │   └── terraform.tfstate.backup
 │   ├── variables.tf
 │   └── vault.tf
+├── test
+│   ├── main_test.go
+│   ├── go.mod
+│   └── go.sum
 
 Terraform Modules
 ├── modules
