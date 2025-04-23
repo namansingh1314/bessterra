@@ -1,4 +1,4 @@
-# Variable for the name of the virtual network
+ # Variable for the name of the virtual network
 variable "vnet_name" {
   description = "The name of the virtual network"
   type        = string
@@ -24,9 +24,9 @@ variable "resource_group_name" {
 }
 
 # Variable for the name of the subnet
-variable "subnet_name" {
+variable "subnet_name" { 
   description = "The name of the subnet"
-  type        = string
+  type        =  string
 }
 
 # Variable for the address prefix of the subnet
